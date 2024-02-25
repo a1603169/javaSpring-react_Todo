@@ -47,6 +47,24 @@ function App() {
     .catch(err => console.error(err));
   };
 
+  const handleDeleteAllTodos = () => {
+    setTodos([]);
+    fetch(`/api/todoEntity/deleteAll`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'text/plain'
+      },
+    })
+    .then(res => {
+      if (!res.ok) {
+        throw new Error(`Server error: ${res.status}`);
+      }
+      return res;
+    })
+    .then(data => console.log(data))
+    .catch(err => console.error(err));
+  }
+
   const handleToggleCompleted = (title) => {
     setTodos(todos.map(todo => {
       if (todo.title === title) {
@@ -95,6 +113,7 @@ function App() {
         placeholder="New todo" 
       />
       <button onClick={handleAddTodo}>Add</button>
+      <button onClick={() => handleDeleteAllTodos()}>Delete All</button>
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>

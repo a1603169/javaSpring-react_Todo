@@ -28,8 +28,15 @@ public class TodoEntityController {
         return todoEntityService.deleteByTitleTodoEntity(title);
     }
 
+    @DeleteMapping("/deleteAll")
+    public List<TodoEntity> deleteAllTodoEntity() {
+       return todoEntityService.deleteAllTodoEntity();
+    }
+
     @PutMapping("/{title}/update")
     public String updateByTitleTodoEntity(@PathVariable("title") String title) {
         return todoEntityService.updateCompletedByTitleTodoEntity(title);
     }
+
+
 }

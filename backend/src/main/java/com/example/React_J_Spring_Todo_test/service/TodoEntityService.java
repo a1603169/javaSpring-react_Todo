@@ -39,6 +39,12 @@ public class TodoEntityService {
         return "Todo content" + title + " is successfully deleted";
     }
 
+    @Transactional
+    public List<TodoEntity> deleteAllTodoEntity() {
+        todoEntityJpaRepository.deleteAll();
+        return null;
+    }
+
     public String updateCompletedByTitleTodoEntity(String title){
         List<TodoEntity> existTodo = todoEntityJpaRepository.findByTitle(title);
         if (existTodo.isEmpty()) {
